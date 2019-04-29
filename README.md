@@ -55,19 +55,19 @@ To check port 2200 wether working or not by ssh -i shoeproject.pem  -p 2200 ubun
 
 Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
-sudo ufw status                  # The UFW should be inactive.
+sudo ufw status                      # The UFW should be inactive.
 
-sudo ufw default deny incoming   # Deny any incoming traffic.
+sudo ufw default deny incoming       # Deny any incoming traffic.
 
-sudo ufw default allow outgoing  # Enable outgoing traffic.
+sudo ufw default allow outgoing      # Enable outgoing traffic.
 
-sudo ufw allow 2200/tcp          # Allow incoming tcp packets on port 2200.
+sudo ufw allow 2200/tcp              # Allow incoming tcp packets on port 2200.
 
-sudo ufw allow www               # Allow HTTP traffic in.
+sudo ufw allow www                   # Allow HTTP traffic in.
 
-sudo ufw allow 123/udp           # Allow incoming udp packets on port 123.
+sudo ufw allow 123/udp               # Allow incoming udp packets on port 123.
 
-sudo ufw deny 22                 # Deny tcp and udp packets on port 53.
+sudo ufw deny 22                     # Deny tcp and udp packets on port 53.
 
 Turn UFW on: sudo ufw enable. The output should be like this:
 
