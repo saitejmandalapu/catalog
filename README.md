@@ -53,7 +53,7 @@ To check port 2200 wether working or not by ssh -i shoeproject.pem  -p 2200 ubun
 
 ### Step 4: Configure the Uncomplicated Firewall (UFW)
 
-Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
+```Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
 sudo ufw status                      # The UFW should be inactive.
 
@@ -68,14 +68,14 @@ sudo ufw allow www                   # Allow HTTP traffic in.
 sudo ufw allow 123/udp               # Allow incoming udp packets on port 123.
 
 sudo ufw deny 22                     # Deny tcp and udp packets on port 53.
-
+```
 Turn UFW on: sudo ufw enable. The output should be like this:
 
 "Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
-Check the status of UFW to list current roles: sudo ufw status. The output should be like this:"
+Check the status of UFW to list current roles: sudo ufw status. The output should be like this:" 
 
-Status: active
+```Status: active
 
 To                         Action      From
 --                         ------      ----
@@ -87,7 +87,7 @@ To                         Action      From
 80/tcp (v6)                ALLOW       Anywhere (v6)             
 123/udp (v6)               ALLOW       Anywhere (v6)             
 22 (v6)                    DENY        Anywhere (v6)
-
+```
 ## Give grader access
 
 ### Step 5: Create a new user account named grader
@@ -199,10 +199,10 @@ Change to the /var/www/catalog/catalog directory.
 Rename the mainpage.py file to __init__.py using: mv mainpage.py __init__.py.
 
 We need to change sqlite to postgresql create_engine in __init__.py,database_setup.py and database_init.py,
-
+```
 # engine = create_engine("sqlite:///catalog.db")
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
-
+```
 ### Step 12.2: Authenticate login through Google
 
 Go to Google Cloud Plateform.
@@ -254,7 +254,7 @@ pip install psycopg2-binary
 ### Step 13.2: Set up and enable a virtual host
 
 Configure and enable a new virtual host
-
+```
 Run this: sudo vi /etc/apache2/sites-available/catalog.conf
 Paste this code:
 <VirtualHost *:80>
@@ -277,7 +277,7 @@ Paste this code:
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-
+```
 Enable the virtual host sudo a2ensite catalog
 
 Enabling site catalog. To activate the new configuration, you need to run: service apache2 reload
@@ -287,14 +287,14 @@ Reload Apache: sudo service apache2 reload.
 ### Step 13.3: Set up the Flask application
 
 Create /var/www/catalog/catalog.wsgi file add the following lines:
-
+```
   import sys
   import logging
   logging.basicConfig(stream=sys.stderr)
   sys.path.insert(0, "/var/www/catalog/")
   from catalog import app as application
   application.secret_key = 'itsasecret'
-
+```
 Restart Apache: sudo service apache2 restart.
 
 From the /var/www/catalog/catalog/ directory, activate the virtual environment: . venv3/bin/activate.
@@ -328,12 +328,12 @@ Enable automatic (security) updates: sudo apt-get install unattended-upgrades.
 Edit /etc/apt/apt.conf.d/50unattended-upgrades, uncomment the line ${distro_id}:${distro_codename}-updates and save it.
 
 Modify /etc/apt/apt.conf.d/20auto-upgrades file so that the upgrades are downloaded and installed every day:
-
+```
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
 APT::Periodic::Unattended-Upgrade "1";
-
+```
 Enable it: sudo dpkg-reconfigure --priority=low unattended-upgrades.
 
 Restart Apache: sudo service apache2 restart.
