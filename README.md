@@ -15,7 +15,7 @@ The database server is PostgreSQL.
 You can visit [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compute.amazonaws.com/category/ for the website deployed.
 
 ## Get a server
-Step 1: Start a new Ubuntu Linux server instance on Amazon EC2
+###Step 1: Start a new Ubuntu Linux server instance on Amazon EC2
 
 Login to aws.amazon.com and login to default user (ubuntu)
 
