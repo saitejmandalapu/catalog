@@ -31,13 +31,13 @@ ssh -i shoeproject.pem ubuntu@54.212.58.181
 
 Secure the server
 
-Step 2: Update and upgrade installed packages
+### Step 2: Update and upgrade installed packages
 
 sudo apt-get update
 
 sudo apt-get upgrade
 
-Step 3: Change the SSH port from 22 to 2200
+### Step 3: Change the SSH port from 22 to 2200
 
 Edit the /etc/ssh/sshd_config file: sudo vi /etc/ssh/sshd_config.
 
@@ -51,7 +51,7 @@ Change inbound rules in Amazon EC2 --> Type : Custom TCP Rule as 2200
 
 To check port 2200 wether working or not by ssh -i shoeproject.pem  -p 2200 ubuntu@54.212.58.181
 
-Step 4: Configure the Uncomplicated Firewall (UFW)
+### Step 4: Configure the Uncomplicated Firewall (UFW)
 
 Configure the default firewall for Ubuntu to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123).
 
@@ -88,15 +88,15 @@ To                         Action      From
 123/udp (v6)               ALLOW       Anywhere (v6)             
 22 (v6)                    DENY        Anywhere (v6)
 
-##Give grader access
+## Give grader access
 
-Step 5: Create a new user account named grader
+### Step 5: Create a new user account named grader
 
 While logged in as ubuntu, add user: sudo adduser grader.
 
 Enter a password (twice) and fill out information for this new user.
 
-Step 6: Give grader the permission to sudo
+### Step 6: Give grader the permission to sudo
 
 Edits the sudoers file: sudo visudo.
 
@@ -113,7 +113,7 @@ Save and exit using CTRL+X and confirm with Y.
 
 Verify that grader has sudo permissions. Run su - grader, enter the password.
 
-Step 7: Create an SSH key pair for grader
+### Step 7: Create an SSH key pair for grader
 -Configure key-based authentication for grader user
 
 create .ssh folder by mkdir /home/grader/.ssh
@@ -134,11 +134,11 @@ On the local machine, cheking if the grader account working or not by running th
 
 ## Prepare to deploy the project
 
-Step 8: Configure the local timezone to UTC
+### Step 8: Configure the local timezone to UTC
 
 While logged in as grader, configure the time zone: sudo dpkg-reconfigure tzdata. Choose time zone UTC.
 
-Step 9: Install and configure Apache to serve a Python mod_wsgi application
+### Step 9: Install and configure Apache to serve a Python mod_wsgi application
 
 While logged in as grader, install Apache: sudo apt-get install apache2.
 
@@ -150,7 +150,7 @@ sudo apt-get install libapache2-mod-wsgi-py3.
 
 Enable mod_wsgi using: sudo a2enmod wsgi.
 
-Step 10: Install and configure PostgreSQL
+### Step 10: Install and configure PostgreSQL
 
 sudo apt-get install libpq-dev python-dev
 
@@ -178,13 +178,13 @@ exit
 
 Switch back to the grader user: exit.
 
-Step 11: Install git
+### Step 11: Install git
 
 While logged in as grader, install git: sudo apt-get install git.
 
 Deploy the Item Catalog project
 
-Step 12.1: Clone and setup the Item Catalog project from the GitHub repository
+### Step 12.1: Clone and setup the Item Catalog project from the GitHub repository
 
 While logged in as grader,
 
@@ -203,7 +203,7 @@ We need to change sqlite to postgresql create_engine in __init__.py,database_set
 # engine = create_engine("sqlite:///catalog.db")
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 
-Step 12.2: Authenticate login through Google
+### Step 12.2: Authenticate login through Google
 
 Go to Google Cloud Plateform.
 
@@ -221,7 +221,7 @@ Open /var/www/catalog/catalog/client_secrets.json and paste the previous content
 
 Replace the client ID templates/login.html file in the project directory.
 
-Step 13.1: Install the virtual environment and dependencies
+### Step 13.1: Install the virtual environment and dependencies
 
 While logged in as grader, install pip: sudo apt-get install python3-pip.
 
@@ -251,7 +251,7 @@ sudo apt-get install libpq-dev
 
 pip install psycopg2-binary
 
-Step 13.2: Set up and enable a virtual host
+### Step 13.2: Set up and enable a virtual host
 
 Configure and enable a new virtual host
 
@@ -284,7 +284,7 @@ Enabling site catalog. To activate the new configuration, you need to run: servi
 
 Reload Apache: sudo service apache2 reload.
 
-Step 13.3: Set up the Flask application
+### Step 13.3: Set up the Flask application
 
 Create /var/www/catalog/catalog.wsgi file add the following lines:
 
@@ -303,7 +303,7 @@ Run: python db_setup.py.
 
 Deactivate the virtual environment: deactivate.
 
-Step 13.4: Disable the default Apache site
+### Step 13.4: Disable the default Apache site
 
 Disable the default Apache site: sudo a2dissite 000-default.conf. The following prompt will be returned:
 
@@ -314,12 +314,12 @@ To activate the new configuration, you need to run:
 
 Reload Apache: sudo service apache2 reload.
 
-Step 13.5: Launch the Web Application
+### Step 13.5: Launch the Web Application
 Restart Apache again: sudo service apache2 restart.
 
 Open your browser to http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.
 
-Step 14: Automatically install updates(optional)
+### Step 14: Automatically install updates(optional)
 
 The unattended-upgrades package can be used to automatically install important system updates.
 
