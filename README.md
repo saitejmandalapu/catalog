@@ -4,13 +4,13 @@ This is the final project for Udacity's Full Stack Web Developer Nanodegree.
 
 This page explains how to secure and set up a Linux distribution on a virtual machine, install and configure a web and database server to host a web application.
 
-The Linux distribution is [Ubuntu] 16.04 LTS.
+The Linux distribution is (Ubuntu)[https://www.ubuntu.com/] 16.04 LTS.
 
-The virtual private server is [Amazon].
+The virtual private server is (Amazon)[https://aws.amazon.com/].
 
 The web application is my SHOE LAND project created earlier in this Nanodegree program.
 
-The database server is [PostgreSQL].
+The database server is (PostgreSQL)[https://www.postgresql.org/].
 
 You can visit [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compute.amazonaws.com/category/ for the website deployed.
 
