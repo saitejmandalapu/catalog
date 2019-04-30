@@ -229,7 +229,7 @@ CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r')
 
 - authorized JavaScript origins.
 
-- Add http:///54.212.58.181.xip.io/login ,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io/callback as authorized redirect URI.
+- Add [http:///54.212.58.181.xip.io],http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io/callback as authorized redirect URI.
 
 - Download the corresponding JSON file, open it and copy the contents.
 
@@ -336,7 +336,7 @@ Paste this code:
 
 - Restart Apache again: sudo service apache2 restart.
 
-- Open your browser to [http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
+- Open your browser to [http://54.212.58.181] or [ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
 
 ### Step 14: Automatically install updates(optional)
 
