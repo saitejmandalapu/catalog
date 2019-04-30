@@ -69,12 +69,12 @@ sudo ufw allow 123/udp               # Allow incoming udp packets on port 123.
 
 sudo ufw deny 22                     # Deny tcp and udp packets on port 53.
 ```
-Turn UFW on: sudo ufw enable. The output should be like this:
-
+Turn UFW on: ```sudo ufw enable```. The output should be like this:
+```
 "Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
 Check the status of UFW to list current roles: sudo ufw status. The output should be like this:" 
-
+```
 ```Status: active
 
 To                         Action      From
@@ -101,15 +101,15 @@ Enter a password (twice) and fill out information for this new user.
 Edits the sudoers file: sudo visudo.
 
 Search for the line that looks like this:
-
+```
 root    ALL=(ALL:ALL) ALL
-
+```
 Below this line, add a new line to give sudo privileges to grader user.
-
+```
 root    ALL=(ALL:ALL) ALL
 
 grader  ALL=(ALL:ALL) ALL
-
+```
 Save and exit using CTRL+X and confirm with Y.
 
 Verify that grader has sudo permissions. Run su - grader, enter the password.
@@ -205,6 +205,18 @@ We need to change sqlite to postgresql create_engine in __init__.py,database_set
 # engine = create_engine("sqlite:///catalog.db")
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 ```
+
+We need another changes in init.py:
+```
+#from db_create import Base,Course,Branch,User
+from catalog.db_create import *
+```
+
+We need another changes in init.py:
+```
+#CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
+```
 ### Step 12.2: Authenticate login through Google
 
 Go to Google Cloud Plateform.
@@ -217,7 +229,7 @@ Create an OAuth Client ID (under the Credentials tab), and 54.212.58.181  add an
 
 authorized JavaScript origins.
 
-Add http:///54.212.58.181.xip.io/login,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io//callback as authorized redirect URI.
+Add [http:///54.212.58.181.xip.io/login,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io//]callback as authorized redirect URI.
 
 Download the corresponding JSON file, open it and copy the contents.
 
@@ -303,7 +315,9 @@ Restart Apache: sudo service apache2 restart.
 
 From the /var/www/catalog/catalog/ directory, activate the virtual environment: . venv3/bin/activate.
 
-Run: python db_setup.py.
+Run: python database_setup.py.
+
+Run python database_init.py.
 
 Deactivate the virtual environment: deactivate.
 
@@ -322,13 +336,13 @@ Reload Apache: sudo service apache2 reload.
 
 Restart Apache again: sudo service apache2 restart.
 
-Open your browser to http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.
+Open your browser to [http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
 
 ### Step 14: Automatically install updates(optional)
 
 The unattended-upgrades package can be used to automatically install important system updates.
 
-Enable automatic (security) updates: sudo apt-get install unattended-upgrades.
+Enable automatic (security) updates: ```sudo apt-get install unattended-upgrades.```
 
 Edit /etc/apt/apt.conf.d/50unattended-upgrades, uncomment the line ${distro_id}:${distro_codename}-updates and save it.
 
@@ -339,23 +353,23 @@ APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
 APT::Periodic::Unattended-Upgrade "1";
 ```
-Enable it: sudo dpkg-reconfigure --priority=low unattended-upgrades.
+Enable it: ```sudo dpkg-reconfigure --priority=low unattended-upgrades.```
 
 Restart Apache: sudo service apache2 restart.
 
 Useful commands
 
-To get log messages from Apache server: sudo tail /var/log/apache2/error.log.
+To get log messages from Apache server: ```sudo tail /var/log/apache2/error.log.```
 
-To restart Apache: sudo service apache2 restart.
+To restart Apache:``` sudo service apache2 restart.```
 
 Other Helpful Resources
 
 DigitalOcean How To Deploy a Flask Application on an Ubuntu VPS
 
-GitHub Repositories
+```GitHub Repositories
 
 adityamehra/udacity-linux-server-configuration
 anumsh/Linux-Server-Configuration
 bencam/linux-server-configuration
-iliketomatoes/linux_server_configuration
+iliketomatoes/linux_server_configuration```
