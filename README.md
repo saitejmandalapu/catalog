@@ -107,6 +107,7 @@ root    ALL=(ALL:ALL) ALL
 Below this line, add a new line to give sudo privileges to grader user.
 
 root    ALL=(ALL:ALL) ALL
+
 grader  ALL=(ALL:ALL) ALL
 
 Save and exit using CTRL+X and confirm with Y.
@@ -114,6 +115,7 @@ Save and exit using CTRL+X and confirm with Y.
 Verify that grader has sudo permissions. Run su - grader, enter the password.
 
 ### Step 7: Create an SSH key pair for grader
+
 -Configure key-based authentication for grader user
 
 create .ssh folder by mkdir /home/grader/.ssh
@@ -211,7 +213,9 @@ Click APIs & services on left menu.
 
 Click Credentials.
 
-Create an OAuth Client ID (under the Credentials tab), and 54.212.58.181  add and ec2-54-212-58-181.us-west-2.compute.amazonaws.com as authorized JavaScript origins.
+Create an OAuth Client ID (under the Credentials tab), and 54.212.58.181  add and ec2-54-212-58-181.us-west-2.compute.amazonaws.com as 
+
+authorized JavaScript origins.
 
 Add http:///54.212.58.181.xip.io/login,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io//callback as authorized redirect URI.
 
@@ -315,6 +319,7 @@ To activate the new configuration, you need to run:
 Reload Apache: sudo service apache2 reload.
 
 ### Step 13.5: Launch the Web Application
+
 Restart Apache again: sudo service apache2 restart.
 
 Open your browser to http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.
