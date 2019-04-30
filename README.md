@@ -120,9 +120,9 @@ grader  ALL=(ALL:ALL) ALL
 
 - create .ssh folder by mkdir /home/grader/.ssh
 
-- Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
+- Run this command:sudo  cp /home/ubuntu/.ssh/authorized_keys   /home/grader/.ssh/authorized_keys
 
-- change ownership chown grader.grader /home/grader/.ssh
+- change ownership: chown grader.grader /home/grader/.ssh
 
 - add 'grader' to sudo group usermod -aG sudo grader
 
@@ -336,7 +336,7 @@ Paste this code:
 
 - Restart Apache again: sudo service apache2 restart.
 
-- Open your browser to [http://54.212.58.181] or [ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
+- Open your browser to [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compute.amazonaws.com.
 
 ### Step 14: Automatically install updates(optional)
 
