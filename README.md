@@ -19,37 +19,37 @@ You can visit [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compu
 
 - Login to aws.amazon.com and login to default user (ubuntu)
 
--Choose EC2 and Launch Instance with appropriate settings.
+- Choose EC2 and Launch Instance with appropriate settings.
 
--Check for instance IPv4 public IP - 54.212.58.181
+- Check for instance IPv4 public IP - 54.212.58.181
 
--we can download a .pem file and connect with following command
+- we can download a .pem file and connect with following command
 ```
 ssh -i shoeproject.pem ubuntu@54.212.58.181
 ```
--22 is Port by Default,Later we need to change it to 2200 as per the udacity-linux-server-configuration rubrics.
+- 22 is Port by Default,Later we need to change it to 2200 as per the udacity-linux-server-configuration rubrics.
 
 ##Secure the server
 
 ### Step 2: Update and upgrade installed packages
 
--sudo apt-get update
+- sudo apt-get update
 
--sudo apt-get upgrade
+- sudo apt-get upgrade
 
 ### Step 3: Change the SSH port from 22 to 2200
 
--Edit the /etc/ssh/sshd_config file: sudo vi /etc/ssh/sshd_config.
+- Edit the /etc/ssh/sshd_config file: sudo vi /etc/ssh/sshd_config.
 
--Change the port number on line 5 from 22 to 2200.
+- Change the port number on line 5 from 22 to 2200.
 
--Save and exit using esc and confirm with :wq.
+- Save and exit using esc and confirm with :wq.
 
--Restart SSH: sudo service ssh restart.
+- Restart SSH: sudo service ssh restart.
 
--Change inbound rules in Amazon EC2 --> Type : Custom TCP Rule as 2200
+- Change inbound rules in Amazon EC2 --> Type : Custom TCP Rule as 2200
 
--To check port 2200 wether working or not by ssh -i shoeproject.pem  -p 2200 ubuntu@54.212.58.181
+- To check port 2200 wether working or not by ssh -i shoeproject.pem  -p 2200 ubuntu@54.212.58.181
 
 ### Step 4: Configure the Uncomplicated Firewall (UFW)
 
@@ -69,7 +69,7 @@ sudo ufw allow 123/udp               # Allow incoming udp packets on port 123.
 
 sudo ufw deny 22                     # Deny tcp and udp packets on port 53.
 ```
--Turn UFW on: ```sudo ufw enable```. The output should be like this:
+- Turn UFW on: ```sudo ufw enable```. The output should be like this:
 ```
 "Command may disrupt existing ssh connections. Proceed with operation (y|n)? y
 Firewall is active and enabled on system startup
@@ -92,184 +92,184 @@ To                         Action      From
 
 ### Step 5: Create a new user account named grader
 
--While logged in as ubuntu, add user: sudo adduser grader.
+- While logged in as ubuntu, add user: sudo adduser grader.
 
--Enter a password (twice) and fill out information for this new user.
+- Enter a password (twice) and fill out information for this new user.
 
 ### Step 6: Give grader the permission to sudo
 
--Edits the sudoers file: sudo visudo.
+- Edits the sudoers file: sudo visudo.
 
--Search for the line that looks like this:
+- Search for the line that looks like this:
 ```
 root    ALL=(ALL:ALL) ALL
 ```
--Below this line, add a new line to give sudo privileges to grader user.
+- Below this line, add a new line to give sudo privileges to grader user.
 ```
 root    ALL=(ALL:ALL) ALL
 
 grader  ALL=(ALL:ALL) ALL
 ```
--Save and exit using CTRL+X and confirm with Y.
+- Save and exit using CTRL+X and confirm with Y.
 
--Verify that grader has sudo permissions. Run su - grader, enter the password.
+- Verify that grader has sudo permissions. Run su - grader, enter the password.
 
 ### Step 7: Create an SSH key pair for grader
 
--Configure key-based authentication for grader user
+- Configure key-based authentication for grader user
 
--create .ssh folder by mkdir /home/grader/.ssh
+- create .ssh folder by mkdir /home/grader/.ssh
 
--Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
+- Run this command cp /home/ubuntu/.ssh/authorized_keys /home/grader/.ssh/authorized_keys
 
--change ownership chown grader.grader /home/grader/.ssh
+- change ownership chown grader.grader /home/grader/.ssh
 
--add 'grader' to sudo group usermod -aG sudo grader
+- add 'grader' to sudo group usermod -aG sudo grader
 
--change permissions for .ssh folder chmod 0700 /home/grader/.ssh/, for authorized_keys chmod 644 authorized_keys
+- change permissions for .ssh folder chmod 0700 /home/grader/.ssh/, for authorized_keys chmod 644 authorized_keys
 
--Check in vi /etc/ssh/sshd_config file if PermitRootLogin is set to no
+- Check in vi /etc/ssh/sshd_config file if PermitRootLogin is set to no
 
--Restart SSH: sudo service ssh restart
+- Restart SSH: sudo service ssh restart
 
--On the local machine, cheking if the grader account working or not by running this command : ```ssh -i shoeproject.pem  -p 2200 grader@54.212.58.181```
+- On the local machine, cheking if the grader account working or not by running this command : ```ssh -i shoeproject.pem  -p 2200 grader@54.212.58.181```
 
 ## Prepare to deploy the project
 
 ### Step 8: Configure the local timezone to UTC
 
--While logged in as grader, configure the time zone: sudo dpkg-reconfigure tzdata. Choose time zone UTC.
+- While logged in as grader, configure the time zone: sudo dpkg-reconfigure tzdata. Choose time zone UTC.
 
 ### Step 9: Install and configure Apache to serve a Python mod_wsgi application
 
--While logged in as grader, install Apache: sudo apt-get install apache2.
+- While logged in as grader, install Apache: sudo apt-get install apache2.
 
--Enter public IP of the Amazon EC2 instance into browser. Check Apache is working or not by executing public IP.
+- Enter public IP of the Amazon EC2 instance into browser. Check Apache is working or not by executing public IP.
 
--My project is built with Python 3. So, I need to install the Python 3 mod_wsgi package:
+- My project is built with Python 3. So, I need to install the Python 3 mod_wsgi package:
 
--sudo apt-get install libapache2-mod-wsgi-py3.
+- sudo apt-get install libapache2-mod-wsgi-py3.
 
--Enable mod_wsgi using: sudo a2enmod wsgi.
+- Enable mod_wsgi using: sudo a2enmod wsgi.
 
 ### Step 10: Install and configure PostgreSQL
 
--sudo apt-get install libpq-dev python-dev
+- sudo apt-get install libpq-dev python-dev
 
--sudo apt-get install postgresql postgresql-contrib
+- sudo apt-get install postgresql postgresql-contrib
 
--sudo su - postgres
+- sudo su - postgres
 
--psql
+- psql
 
--CREATE USER catalog WITH PASSWORD 'catalog';
+- CREATE USER catalog WITH PASSWORD 'catalog';
 
--ALTER USER catalog CREATEDB;
+- ALTER USER catalog CREATEDB;
 
--CREATE DATABASE catalog WITH OWNER catalog;
+- CREATE DATABASE catalog WITH OWNER catalog;
 
--\c catalog
+- \c catalog
 
--REVOKE ALL ON SCHEMA public FROM public;
+- REVOKE ALL ON SCHEMA public FROM public;
 
--GRANT ALL ON SCHEMA public TO catalog;
+- GRANT ALL ON SCHEMA public TO catalog;
 
--\q
+- \q
 
--exit
+- exit
 
--Switch back to the grader user: exit.
+- Switch back to the grader user: exit.
 
 ### Step 11: Install git
 
--While logged in as grader, install git: sudo apt-get install git.
+- While logged in as grader, install git: sudo apt-get install git.
 
--Deploy the Item Catalog project
+- Deploy the Item Catalog project
 
 ### Step 12.1: Clone and setup the Item Catalog project from the GitHub repository
 
--While logged in as grader,
+- While logged in as grader,
 
--From the /var/www directory, Clone the catalog project:
+- From the /var/www directory, Clone the catalog project:
 
--sudo git clone https://github.com/saitejmandalapu/catalog.git
+- sudo git clone https://github.com/saitejmandalapu/catalog.git
 
--Change the ownership of the catalog directory to grader using: sudo chown -R grader:grader catalog/.
+- Change the ownership of the catalog directory to grader using: sudo chown -R grader:grader catalog/.
 
--Change to the /var/www/catalog/catalog directory.
+- Change to the /var/www/catalog/catalog directory.
 
--Rename the mainpage.py file to __init__.py using: mv mainpage.py __init__.py.
+- Rename the mainpage.py file to __init__.py using: mv mainpage.py __init__.py.
 
--We need to change sqlite to postgresql create_engine in __init__.py,database_setup.py and database_init.py,
+- We need to change sqlite to postgresql create_engine in __init__.py,database_setup.py and database_init.py,
 ```
 # engine = create_engine("sqlite:///catalog.db")
 engine = create_engine('postgresql://catalog:catalog@localhost/catalog')
 ```
 
--We need another changes in init.py:
+- We need another changes in init.py:
 ```
 #from db_create import Base,Course,Branch,User
 from catalog.db_create import *
 ```
 
--We need another changes in init.py:
+- We need another changes in init.py:
 ```
 #CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())['web']['client_id']
 CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r').read())['web']['client_id']
 ```
 ### Step 12.2: Authenticate login through Google
 
--Go to Google Cloud Plateform.
+- Go to Google Cloud Plateform.
 
--Click APIs & services on left menu.
+- Click APIs & services on left menu.
 
--Click Credentials.
+- Click Credentials.
 
--Create an OAuth Client ID (under the Credentials tab), and 54.212.58.181  add and ec2-54-212-58-181.us-west-2.compute.amazonaws.com as 
+- Create an OAuth Client ID (under the Credentials tab), and 54.212.58.181  add and ec2-54-212-58-181.us-west-2.compute.amazonaws.com as 
 
--authorized JavaScript origins.
+- authorized JavaScript origins.
 
--Add [http:///54.212.58.181.xip.io/login,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io//]callback as authorized redirect URI.
+- Add [http:///54.212.58.181.xip.io/login,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io//]callback as authorized redirect URI.
 
--Download the corresponding JSON file, open it and copy the contents.
+- Download the corresponding JSON file, open it and copy the contents.
 
--Open /var/www/catalog/catalog/client_secrets.json and paste the previous contents into the this file.
+- Open /var/www/catalog/catalog/client_secrets.json and paste the previous contents into the this file.
 
--Replace the client ID templates/login.html file in the project directory.
+- Replace the client ID templates/login.html file in the project directory.
 
 ### Step 13.1: Install the virtual environment and dependencies
 
--While logged in as grader, install pip: sudo apt-get install python3-pip.
+- While logged in as grader, install pip: sudo apt-get install python3-pip.
 
--Install the virtual environment: sudo apt-get install python-virtualenv
+- Install the virtual environment: sudo apt-get install python-virtualenv
 
--Change to the /var/www/catalog/catalog/ directory.
+- Change to the /var/www/catalog/catalog/ directory.
 
--Create the virtual environment: sudo virtualenv -p python3 venv3.
+- Create the virtual environment: sudo virtualenv -p python3 venv3.
 
--Change the ownership to grader with: sudo chown -R grader:grader venv3/.
+- Change the ownership to grader with: sudo chown -R grader:grader venv3/.
 
--Activate the new environment: . venv3/bin/activate.
+- Activate the new environment: . venv3/bin/activate.
 
--Install the following dependencies:
+- Install the following dependencies:
 
--pip install httplib2
+- pip install httplib2
 
--pip install requests
+- pip install requests
 
--pip install --upgrade oauth2client
+- pip install --upgrade oauth2client
 
--pip install sqlalchemy
+- pip install sqlalchemy
 
--pip install flask
+- pip install flask
 
--sudo apt-get install libpq-dev
+- sudo apt-get install libpq-dev
 
--pip install psycopg2-binary
+- pip install psycopg2-binary
 
 ### Step 13.2: Set up and enable a virtual host
 
--Configure and enable a new virtual host
+- Configure and enable a new virtual host
 ```
 Run this: sudo vi /etc/apache2/sites-available/catalog.conf
 Paste this code:
@@ -294,15 +294,15 @@ Paste this code:
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
--Enable the virtual host sudo a2ensite catalog
+- Enable the virtual host sudo a2ensite catalog
 
--Enabling site catalog. To activate the new configuration, you need to run: service apache2 reload
+- Enabling site catalog. To activate the new configuration, you need to run: service apache2 reload
 
--Reload Apache: sudo service apache2 reload.
+- Reload Apache: sudo service apache2 reload.
 
 ### Step 13.3: Set up the Flask application
 
--Create /var/www/catalog/catalog.wsgi file add the following lines:
+- Create /var/www/catalog/catalog.wsgi file add the following lines:
 ```
   import sys
   import logging
@@ -311,61 +311,61 @@ Paste this code:
   from catalog import app as application
   application.secret_key = 'itsasecret'
 ```
--Restart Apache: sudo service apache2 restart.
+- Restart Apache: sudo service apache2 restart.
 
--From the /var/www/catalog/catalog/ directory, activate the virtual environment: . venv3/bin/activate.
+- From the /var/www/catalog/catalog/ directory, activate the virtual environment: . venv3/bin/activate.
 
--Run: python database_setup.py.
+- Run: python database_setup.py.
 
--Run python database_init.py.
+- Run python database_init.py.
 
--Deactivate the virtual environment: deactivate.
+- Deactivate the virtual environment: deactivate.
 
 ### Step 13.4: Disable the default Apache site
 
--Disable the default Apache site: sudo a2dissite 000-default.conf. The following prompt will be returned:
+- Disable the default Apache site: sudo a2dissite 000-default.conf. The following prompt will be returned:
 
--Site 000-default disabled.
+- Site 000-default disabled.
 
--To activate the new configuration, you need to run:
+- To activate the new configuration, you need to run:
   service apache2 reload
 
--Reload Apache: sudo service apache2 reload.
+- Reload Apache: sudo service apache2 reload.
 
 ### Step 13.5: Launch the Web Application
 
--Restart Apache again: sudo service apache2 restart.
+- Restart Apache again: sudo service apache2 restart.
 
--Open your browser to [http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
+- Open your browser to [http://54.212.58.181 or ec2-54-212-58-181.us-west-2.compute.amazonaws.com.]
 
 ### Step 14: Automatically install updates(optional)
 
--The unattended-upgrades package can be used to automatically install important system updates.
+- The unattended-upgrades package can be used to automatically install important system updates.
 
--Enable automatic (security) updates: ```sudo apt-get install unattended-upgrades.```
+- Enable automatic (security) updates: ```sudo apt-get install unattended-upgrades.```
 
--Edit /etc/apt/apt.conf.d/50unattended-upgrades, uncomment the line ${distro_id}:${distro_codename}-updates and save it.
+- Edit /etc/apt/apt.conf.d/50unattended-upgrades, uncomment the line ${distro_id}:${distro_codename}-updates and save it.
 
--Modify /etc/apt/apt.conf.d/20auto-upgrades file so that the upgrades are downloaded and installed every day:
+- Modify /etc/apt/apt.conf.d/20auto-upgrades file so that the upgrades are downloaded and installed every day:
 ```
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Download-Upgradeable-Packages "1";
 APT::Periodic::AutocleanInterval "7";
 APT::Periodic::Unattended-Upgrade "1";
 ```
--Enable it: ```sudo dpkg-reconfigure --priority=low unattended-upgrades.```
+- Enable it: ```sudo dpkg-reconfigure --priority=low unattended-upgrades.```
 
--Restart Apache: sudo service apache2 restart.
+- Restart Apache: sudo service apache2 restart.
 
--Useful commands
+- Useful commands
 
--To get log messages from Apache server: ```sudo tail /var/log/apache2/error.log.```
+- To get log messages from Apache server: ```sudo tail /var/log/apache2/error.log.```
 
--To restart Apache:``` sudo service apache2 restart.```
+- To restart Apache:``` sudo service apache2 restart.```
 
--Other Helpful Resources
+- Other Helpful Resources
 
--DigitalOcean How To Deploy a Flask Application on an Ubuntu VPS
+- DigitalOcean How To Deploy a Flask Application on an Ubuntu VPS
 
 ```GitHub Repositories
 
@@ -373,3 +373,5 @@ adityamehra/udacity-linux-server-configuration
 anumsh/Linux-Server-Configuration
 bencam/linux-server-configuration
 iliketomatoes/linux_server_configuration```
+
+Special Thanks to Alain Boisvert for a very helpful README in Linux Server Configuration Project-Udacity*
