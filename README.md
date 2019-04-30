@@ -17,7 +17,7 @@ You can visit [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compu
 ## Get a server
 ### Step 1: Start a new Ubuntu Linux server instance on Amazon EC2
 
--Login to aws.amazon.com and login to default user (ubuntu)
+- Login to aws.amazon.com and login to default user (ubuntu)
 
 -Choose EC2 and Launch Instance with appropriate settings.
 
