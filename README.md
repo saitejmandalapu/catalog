@@ -4,7 +4,7 @@ This is the final project for Udacity's Full Stack Web Developer Nanodegree.
 
 This page explains how to secure and set up a Linux distribution on a virtual machine, install and configure a web and database server to host a web application.
 
-The Linux distribution is (Ubuntu)[https://www.ubuntu.com/] 16.04 LTS.
+The Linux distribution is [Ubuntu](https://www.ubuntu.com/) 16.04 LTS.
 
 The virtual private server is (Amazon)[https://aws.amazon.com/].
 
