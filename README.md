@@ -29,7 +29,7 @@ ssh -i shoeproject.pem ubuntu@54.212.58.181
 ```
 22 is Port by Default,Later we need to change it to 2200 as per the udacity-linux-server-configuration rubrics.
 
-Secure the server
+##Secure the server
 
 ### Step 2: Update and upgrade installed packages
 
