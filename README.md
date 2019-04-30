@@ -229,7 +229,7 @@ CLIENT_ID = json.loads(open('/var/www/catalog/catalog/client_secrets.json', 'r')
 
 - authorized JavaScript origins.
 
-- Add [ http:///54.212.58.181.xip.io/login ],[ http://54.212.58.181.xip.io//gconnect],[http://54.212.58.181.xip.io/callback ] as authorized redirect URI.
+- Add http:///54.212.58.181.xip.io/login ,http://54.212.58.181.xip.io//gconnect,http://54.212.58.181.xip.io/callback as authorized redirect URI.
 
 - Download the corresponding JSON file, open it and copy the contents.
 
