@@ -6,11 +6,11 @@ This page explains how to secure and set up a Linux distribution on a virtual ma
 
 The Linux distribution is [Ubuntu](https://www.ubuntu.com/) 16.04 LTS.
 
-The virtual private server is (Amazon)[https://aws.amazon.com/].
+The virtual private server is [Amazon](https://aws.amazon.com/).
 
 The web application is my SHOE LAND project created earlier in this Nanodegree program.
 
-The database server is (PostgreSQL)[https://www.postgresql.org/].
+The database server is [PostgreSQL](https://www.postgresql.org/).
 
 You can visit [http://54.212.58.181] or http://ec2-54-212-58-181.us-west-2.compute.amazonaws.com/category/ for the website deployed.
 
