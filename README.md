@@ -24,9 +24,9 @@ Choose EC2 and Launch Instance with appropriate settings.
 Check for instance IPv4 public IP - 54.212.58.181
 
 we can download a .pem file and connect with following command
-
+```
 ssh -i shoeproject.pem ubuntu@54.212.58.181
-
+```
 22 is Port by Default,Later we need to change it to 2200 as per the udacity-linux-server-configuration rubrics.
 
 Secure the server
